@@ -1,3 +1,4 @@
+// Maham Imran 22i-2733
 #include <iostream>
 using namespace std;
 // removes any spaces in expression
@@ -32,10 +33,10 @@ string simplify(string subexpression){
             int end = findmatchingparenthesis(subexpression, i+1);
             cout<<"start: "<<start<<endl;
             cout<<"end: "<<end<<endl;
-            for(int j=start; j<end; j++){
-                // apply De Morgan's laws
-                // change operator between subexpressions
-            }
+            string subsubexp = subexpression.substr(start+1, end-start-1);
+            cout<<"subsubexp: "<<subsubexp<<endl;
+            // recursive call to simplify subsubexp until no more negations
+
         }
     }
     return "";
