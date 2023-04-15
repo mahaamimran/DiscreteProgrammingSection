@@ -80,6 +80,21 @@ void initiateCards(){
         card[i].set_shadings(shadings[rand()%3]);
         card[i].set_number(number[rand()%3]);
     }
+    card[0].set_color()="red";
+    card[0].set_symbol()="squiggles";
+    card[0].set_shadings()="solid";
+    card[0].set_number()=1;
+
+    card[1].set_color()="red";
+    card[1].set_symbol()="ovals";
+    card[1].set_shadings()="striped";
+    card[1].set_number()=2;
+
+    card[2].set_color()="red";
+    card[2].set_symbol()="diamonds";
+    card[2].set_shadings()="outlined";
+    card[2].set_number()=3;
+
         for(int i=0;i<12;i++){
             cout<<"Card "<<i+1<<": ";
             card[i].print();
@@ -124,10 +139,21 @@ bool isaSet(int index[]){
             number[2]++;
     }
     for(int i=0;i<3;i++){
-        if(color[i] == 3 || symbol[i] == 3 || shadings[i] == 3 || number[i] == 3)
-            return false;
+        if(color[i] == 3 || (color[0] == 1 && color[1] == 1 && color[2] == 1)){ // either all same color or diff
+            if(symbol[i] == 3 || (symbol[0] == 1 && symbol[1] == 1 && symbol[2] == 1)){ // either all same symbol or diff
+                if(shadings[i] == 3 || (shadings[0] == 1 && shadings[1] == 1 && shadings[2] == 1)){ // either all same shadings or diff
+                    if(number[i] == 3 || (number[0] == 1 && number[1] == 1 && number[2] == 1)){ // either all same number or diff
+                        return true;
+                        cout<<"set lalalala";
+                    }
+                }
+            }
+
+        }  
+        else cout<<"not a set awww";
     }
-    return true;
+    return false;
+
 }
 void startGame(){
     // user will be asked to enter the index of any 3 cards
