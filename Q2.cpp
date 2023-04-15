@@ -1,57 +1,74 @@
+// Maham Imran 22i-2733
 #include <iostream>
 #include <string>
 using namespace std;
+// removes any spaces in expression
+string removespaces(string expression){
+    string newexp;
+    for(int i=0; i<expression.length(); i++){
+        if(expression[i] != ' '){
+            newexp += expression[i];
+        }
+    }
+    return newexp;
+}
+// evaluating expression
 bool evaluateExpression(string expression){
-    bool result = false;
+    bool boolexp = 0;
     int i = 0;
     while (i < expression.length()){
-        if (expression[i] == 'T'){
-            result = true;
+        if (expression[i] == 'F'){
+            boolexp = 0;
             i++;
         }
-        else if (expression[i] == 'F'){
-            result = false;
+        else if (expression[i] == 'T'){
+            boolexp = 1;
             i++;
-        }
-        else if (expression[i] == '|'){
-            i++;
-            if (expression[i] == 'T'){
-                result = result || true;
-                i++;
-            }
-            else if (expression[i] == 'F'){
-                result = result || false;
-                i++;
-            }
         }
         else if (expression[i] == '^'){
             i++;
             if (expression[i] == 'T'){
-                result = result ^ true;
+                boolexp = boolexp ^ 1;
                 i++;
             }
             else if (expression[i] == 'F'){
-                result = result ^ false;
+                boolexp = boolexp ^ 0;
                 i++;
             }
         }
         else if (expression[i] == '&'){
             i++;
             if (expression[i] == 'T'){
-                result = result && true;
+                boolexp = boolexp && 1;
                 i++;
             }
             else if (expression[i] == 'F'){
-                result = result && false;
+                boolexp = boolexp && 0;
+                i++;
+            }
+        }
+        else if (expression[i] == '|'){
+            i++;
+            if (expression[i] == 'T'){
+                boolexp = boolexp || 1;
+                i++;
+            }
+            else if (expression[i] == 'F'){
+                boolexp = boolexp || 0;
                 i++;
             }
         }
     }
-    return result;
+    return boolexp;
 }
 int main(){
-    string expression = "F&T|F";
-    bool result = evaluateExpression(expression);
-    cout<<expression<<" = "<<(result ? "T":"F")<<endl;
+    // works w/ any expression
+    string expression = "F & T | T & F"; 
+    // removing any spaces in expression
+    expression = removespaces(expression);
+    // evaluating expression
+    bool boolexp = evaluateExpression(expression);
+    // printing expression and result w/ turnary operator
+    cout<<expression<<"="<<(boolexp?"T":"F")<<endl;
     return 0;
 }

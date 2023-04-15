@@ -1,4 +1,10 @@
-% By declaring task/2 as dynamic the program can modify the completion status of tasks at runtime
+% Maham Imran 22i-2733
+% friendly reminder for Maham: you can use the following command to run the program
+% swipl -s Q4.pl -g start -t halt
+% or in terminal, cd dir, swipl, ['Q4.pl'].
+
+
+% declaring task/2 as dynamic means the program can modify status @ runtime
 % the 2 represents that it takes 2 arguments, the task name and the completion status
 :- dynamic task/2.
 
@@ -36,7 +42,7 @@ add_task(Z) :-
     assert(task(Z, false)),
     write('Task added: '), write(Z), nl.
 
-% Entry point for the program
+% the main 
 start :-
     write('Welcome!'), nl,
     write('What action would you like to perform?'), nl,
