@@ -31,26 +31,56 @@ string simplify(string subexpression){
         if(subexpression[i] == '~' && subexpression[i+1] == '('){
             int start = i+1;
             int end = findmatchingparenthesis(subexpression, i+1);
-            cout<<"start: "<<start<<endl;
-            cout<<"end: "<<end<<endl;
-            string subsubexp = subexpression.substr(start+1, end-start-1);
-            cout<<"subsubexp: "<<subsubexp<<endl;
-            // recursive call to simplify subsubexp until no more negations
-
+            subexpression[start-1] = ' ';
+            subexpression[end] = subexpression[end-1];
+            subexpression[end-1] = '~';
+            subexpression[start] = '~';
+            if(subexpression[start+2] == 'v')
+                subexpression[start+2] = '^';
+            else if(subexpression[start+2] == '^')
+                subexpression[start+2] = 'v';
+            cout<<subexpression<<endl;
         }
     }
     return "";
 }
 int main(){
-    // ~(AvB) == (~A^~B)
-    // ~(A ^ (B v C))
-    // returns (~A v (~B ^ ~C))
-    string expression="";
-    cout<<"enter expression: ";
-    // getline(cin,expression);
+    cout<<endl;
+    string expression = "~(A v B)";
+    expression = removespaces(expression);
+    cout<<"expression 1 before: "<<expression<<endl;
+    cout<<"expression 1 after: "<<simplify(expression);
+    cout<<endl;
+
     expression = "~(A ^ B)";
     expression = removespaces(expression);
-    cout<<expression<<endl;
-    cout<<simplify(expression);
+    cout<<"expression 2 before: "<<expression<<endl;
+    cout<<"expression 2 after: "<<simplify(expression);
+    cout<<endl;
+
+    expression = "~(A v B) ^ C";
+    expression = removespaces(expression);
+    cout<<"expression 3 before: "<<expression<<endl;
+    cout<<"expression 3 after: "<<simplify(expression);
+    cout<<endl;
+
+    expression = "~(A ^ B) v C";
+    expression = removespaces(expression);
+    cout<<"expression 4 before: "<<expression<<endl;
+    cout<<"expression 4 after: "<<simplify(expression);
+    cout<<endl;
+
+    expression = "~(C v D)";
+    expression = removespaces(expression);
+    cout<<"expression 5 before: "<<expression<<endl;
+    cout<<"expression 5 after: "<<simplify(expression);
+    cout<<endl;
+
+    expression = "~(C ^ D)";
+    expression = removespaces(expression);
+    cout<<"expression 6 before: "<<expression<<endl;
+    cout<<"expression 6 after: "<<simplify(expression);
+    cout<<endl;
+
     return 0;
 }
